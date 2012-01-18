@@ -1,0 +1,24 @@
+<package>
+  <description brief="neo_platformctrl_mecanum">
+
+     neo_platformctrl_mecanum
+
+  </description>
+  <author>neobotix</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_platformctrl_mecanum</url>
+
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="trajectory_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="tf"/>
+  <export>
+    <cpp cflags="-I${prefix}/common/include -I${prefix}/ros/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lneo_platformctrl_mecanum"/>
+  </export>
+
+
+</package>
+
+

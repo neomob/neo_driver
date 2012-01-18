@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- parameters -->
+	<arg name="hasNoTFBroadcast" default="false" /> 
+	<rosparam command="load" ns="srbus" file="$(find neo_srb_us)/ros/launch/$(env ROBOT).yaml"/>
+	<!-- start nodes -->
+	<node pkg="neo_srb_us" type="neo_srb_us" ns="srbus" name="srb_us_node" respawn="false" output="screen"/>
+	<!-- include transformation broadcaster? -->
+	<include if="$(arg hasNoTFBroadcast)" file="$(find neo_srb_us)/ros/launch/srb_tf_us.launch"/>
+
+</launch>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- parameters -->
+	<arg name="hasNoTFBroadcast" default="false" /> 
+	<rosparam command="load" ns="srbgyro" file="$(find neo_srbgyro)/ros/launch/$(env ROBOT).yaml"/>
+	<!-- start nodes -->
+	<node pkg="neo_srbgyro" type="neo_srbgyro" ns="srbgyro" name="srbgyro_node" respawn="false" output="screen"/>
+</launch>
+
+

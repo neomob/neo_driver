@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+	<rosparam command="load" ns="neo_bd_mpo" file="$(find neo_base_drive_can)/ros/launch/$(env ROBOT).yaml"/>
+	<rosparam command="load" ns="neo_bd_mpo/drive0" file="$(find neo_base_drive_can)/ros/launch/$(env ROBOT)_drive_fl.yaml"/>
+	<rosparam command="load" ns="neo_bd_mpo/drive1" file="$(find neo_base_drive_can)/ros/launch/$(env ROBOT)_drive_fr.yaml"/>
+	<rosparam command="load" ns="neo_bd_mpo/drive2" file="$(find neo_base_drive_can)/ros/launch/$(env ROBOT)_drive_bl.yaml"/>
+	<rosparam command="load" ns="neo_bd_mpo/drive3" file="$(find neo_base_drive_can)/ros/launch/$(env ROBOT)_drive_br.yaml"/>
+
+  	<!-- start base_drive_chain and locate IniFiles -->
+	<node pkg="neo_base_drive_can" type="neo_base_drive_can_node" ns="neo_bd_mpo" name="base_drive_can_node" respawn="false" output="screen" ><!--launch-prefix="xterm -e gdb args"-->
+		<remap from="joint_states" to="/joint_states"/>
+		<remap from="cmd_joint_traj" to="/cmd_joint_traj"/>
+	</node>
+
+	
+</launch>	

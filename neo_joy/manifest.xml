@@ -1,0 +1,15 @@
+<package>
+  <description brief="neo_joy">
+
+     neo_joy
+
+  </description>
+  <author>Timo Hackel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_joy</url>
+  <depend package="joy"/>
+  <depend package="rostest"/>
+</package>
+
+

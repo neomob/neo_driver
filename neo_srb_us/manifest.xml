@@ -1,0 +1,17 @@
+<package>
+  <description brief="neo_srb_us">
+
+     neo_srb_us
+
+  </description>
+  <author>Timo Hackel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neobotix/neo_srb_us</url>
+  <depend package="neo_serrelayboard"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="tf"/>
+</package>
+
+

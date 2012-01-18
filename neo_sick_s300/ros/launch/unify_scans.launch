@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- parameters -->
+	<arg name="name" default="scan_unified" /> 
+	<arg name="scan_1" default="/sick_front/scan" />
+	<arg name="scan_2" default="/sick_back/scan" /> 
+	<!-- start nodes -->
+	<!--node pkg="cob_sick_s300" type="cob_unified_scan_publisher" name="$(arg name)" respawn="false" output="screen" >
+		<remap from="/scan_front" to="$(arg scan_1)"/>
+		<remap from="/scan_rear" to="$(arg scan_2)"/>
+		<remap from="scan_unified" to="/$(arg name)/scan"/>
+	</node-->
+	<node pkg="neo_sick_s300" type="neo_unified_scan_publisher" name="$(arg name)" respawn="false" output="screen">
+		<remap from="/scan_front" to="$(arg scan_1)"/>
+		<remap from="/scan_rear" to="$(arg scan_2)"/>
+		<remap from="/scan_unified" to="/$(arg name)/scan"/>
+	</node>
+	<node pkg="tf" type="static_transform_publisher" name="scan_combined_broadcaster" args="0 0 0 0 0 0 base_link scan_combined 10" />
+
+</launch>

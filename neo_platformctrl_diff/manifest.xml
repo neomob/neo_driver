@@ -1,0 +1,23 @@
+<package>
+  <description brief="neo_platformctrl_diff">
+
+     neo_platformctrl_diff
+
+  </description>
+  <author>Timo Hackel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_platformctrl_diff</url>
+
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="trajectory_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="tf"/>
+  <export>
+    <cpp cflags="-I${prefix}/common/include -I${prefix}/ros/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lneo_platformctrl_diff"/>
+  </export>
+
+</package>
+
+

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<rosparam command="load" ns="platformctrl" file="$(find neo_platformctrl_diff)/ros/launch/$(env ROBOT).yaml"/>
+	<node pkg="neo_platformctrl_diff" type="neo_platformctrl_diff_node" ns="srbplatformctrl" name="srbplatformctrl_node" respawn="false" output="screen"/>
+</launch>
+
+

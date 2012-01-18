@@ -1,0 +1,23 @@
+<package>
+  <description brief="neo_can">
+
+     neo_can
+
+  </description>
+  <author>Timo Hackel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_can</url>
+
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="diagnostic_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="trajectory_msgs"/>
+  <depend package="cob_utilities"/>
+  <depend package="libpcan"/>
+  <depend package="libntcan"/>
+  <export>
+    <cpp cflags="-I${prefix}/common/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lneo_can"/>
+  </export>
+</package>

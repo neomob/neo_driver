@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="neo_srbdrive" type="neo_srbdrive" ns="srbdrive" name="srbdrive_node" respawn="false" output="screen"/>
+</launch>
+
+
