@@ -78,6 +78,7 @@ void SRBDriveNode::sendJointState(const neo_serrelayboard::DriveStates& srsState
 {
 	//ROS_INFO("wrap srs velocity cmd: %f %f",srsState.angularVelocity[0],srsState.angularVelocity[1]);
 	sensor_msgs::JointState state;
+	state.header.stamp = ros::Time::now();
 	for(int i=0; i<2; i++)
 	{
 		state.position.push_back(srsState.angularPosition[i]); 

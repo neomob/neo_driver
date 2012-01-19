@@ -1,5 +1,5 @@
 #Parameters for left drive
-joint_name: left_wheel_link
+joint_name: left_wheel_joint
 EncIncrPerRevMot: 8000
 VelMeasFrqHz: 1
 GearRatio: 6
