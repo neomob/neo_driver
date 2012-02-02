@@ -59,6 +59,7 @@ class PlatformCtrlNode
 	boost::mutex mutex;
 	OdomPose p;
 	Kinematics* kin;
+	bool sendTransform;
 };
 
 PlatformCtrlNode::PlatformCtrlNode()
@@ -79,6 +80,7 @@ int PlatformCtrlNode::init()
 {
 	std::string kinType;
 	n.getParam("/platformctrl/kinematics", kinType);
+	n.param<bool>("sendTransform",sendTransform,true);
 
 	if (kinType == "DiffDrive2W")
 	{
@@ -135,15 +137,18 @@ void PlatformCtrlNode::receiveOdo(const sensor_msgs::JointState& js)
 	kin->execForwKin(js, odom, p);
 	topicPub_Odometry.publish(odom);
 	//odometry transform:
-	geometry_msgs::TransformStamped odom_trans;
-	odom_trans.header.stamp = odom.header.stamp;
-	odom_trans.header.frame_id = odom.header.frame_id;
-	odom_trans.child_frame_id = odom.child_frame_id;
-	odom_trans.transform.translation.x = odom.pose.pose.position.x;
-	odom_trans.transform.translation.y = odom.pose.pose.position.y;
-	odom_trans.transform.translation.z = odom.pose.pose.position.z;
-	odom_trans.transform.rotation = odom.pose.pose.orientation;
-	odom_broadcaster.sendTransform(odom_trans);
+	if(sendTransform)
+	{
+		geometry_msgs::TransformStamped odom_trans;
+		odom_trans.header.stamp = odom.header.stamp;
+		odom_trans.header.frame_id = odom.header.frame_id;
+		odom_trans.child_frame_id = odom.child_frame_id;
+		odom_trans.transform.translation.x = odom.pose.pose.position.x;
+		odom_trans.transform.translation.y = odom.pose.pose.position.y;
+		odom_trans.transform.translation.z = odom.pose.pose.position.z;
+		odom_trans.transform.rotation = odom.pose.pose.orientation;
+		odom_broadcaster.sendTransform(odom_trans);
+	}
    mutex.unlock();
 }
 

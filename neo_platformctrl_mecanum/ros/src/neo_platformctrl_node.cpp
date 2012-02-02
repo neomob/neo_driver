@@ -59,6 +59,7 @@ class PlatformCtrlNode
 	boost::mutex mutex;
 	OdomPose p;
 	Kinematics* kin;
+	bool sendTransform;
 };
 
 PlatformCtrlNode::PlatformCtrlNode()
@@ -75,28 +76,36 @@ PlatformCtrlNode::~PlatformCtrlNode()
 int PlatformCtrlNode::init()
 {
 	std::string kinType;
-	n.getParam("/platformctrl/kinematics", kinType);
+	n.param<bool>("sendTransform",sendTransform,false);
+	if(sendTransform)
+	{
+		ROS_INFO("platform ctrl node: sending transformation");
+	} else {
+
+		ROS_INFO("platform ctrl node: sending no transformation");
+	}
+	n.getParam("kinematics", kinType);
 
 	if (kinType == "Mecanum4W")
 	{
 		double wheelDiameter, axisLength, axisWidth;
 		Mecanum4WKinematics* mecKin = new Mecanum4WKinematics;
 		kin = mecKin;
-		if(n.hasParam("/platformctrl/wheelDiameter"))
+		if(n.hasParam("wheelDiameter"))
 		{
-			n.getParam("/platformctrl/wheelDiameter",wheelDiameter);
+			n.getParam("wheelDiameter",wheelDiameter);
 			mecKin->setWheelDiameter(wheelDiameter);
 		}
 		else mecKin->setWheelDiameter(0.3);
-		if(n.hasParam("/platformctrl/robotWidth"))
+		if(n.hasParam("robotWidth"))
 		{
-			n.getParam("/platformctrl/robotWidth",axisWidth);
+			n.getParam("robotWidth",axisWidth);
 			mecKin->setAxis1Length(axisWidth);
 		}
 		else mecKin->setAxis1Length(0.5);
-		if(n.hasParam("/platformctrl/robotLength"))
+		if(n.hasParam("robotLength"))
 		{
-			n.getParam("/platformctrl/robotLength",axisLength);
+			n.getParam("robotLength",axisLength);
 			mecKin->setAxis2Length(axisLength);
 		}
 		else mecKin->setAxis2Length(0.5);
@@ -137,22 +146,25 @@ void PlatformCtrlNode::receiveOdo(const sensor_msgs::JointState& js)
 	kin->execForwKin(js, odom, p);
 	topicPub_Odometry.publish(odom);
 	//odometry transform:
-	geometry_msgs::TransformStamped odom_trans;
-	odom_trans.header.stamp = odom.header.stamp;
-	odom_trans.header.frame_id = odom.header.frame_id;
-	odom_trans.child_frame_id = odom.child_frame_id;
-	odom_trans.transform.translation.x = odom.pose.pose.position.x;
-	odom_trans.transform.translation.y = odom.pose.pose.position.y;
-	odom_trans.transform.translation.z = odom.pose.pose.position.z;
-	odom_trans.transform.rotation = odom.pose.pose.orientation;
-	odom_broadcaster.sendTransform(odom_trans);
+	if(sendTransform)
+	{
+		geometry_msgs::TransformStamped odom_trans;
+		odom_trans.header.stamp = odom.header.stamp;
+		odom_trans.header.frame_id = odom.header.frame_id;
+		odom_trans.child_frame_id = odom.child_frame_id;
+		odom_trans.transform.translation.x = odom.pose.pose.position.x;
+		odom_trans.transform.translation.y = odom.pose.pose.position.y;
+		odom_trans.transform.translation.z = odom.pose.pose.position.z;
+		odom_trans.transform.rotation = odom.pose.pose.orientation;
+		odom_broadcaster.sendTransform(odom_trans);
+	}
    mutex.unlock();
 }
 
 
 int main (int argc, char** argv)
 {
-	ros::init(argc, argv, "neo_platformctrl_node");
+	ros::init(argc, argv, "mecanum_node");
 	PlatformCtrlNode node;
 	if(node.init() != 0) ROS_ERROR("can't initialize neo_platformctrl_node");
 	ros::spin();

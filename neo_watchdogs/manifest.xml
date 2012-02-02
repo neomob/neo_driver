@@ -1,0 +1,16 @@
+<package>
+  <description brief="neo_watchdogs">
+
+     neo_watchdogs
+
+  </description>
+  <author>Timo Hackel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_watchdogs</url>
+  <depend package="neo_serrelayboard"/>
+  <depend package="move_base_msgs"/>
+  <depend package="roscpp"/>
+</package>
+
+

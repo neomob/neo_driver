@@ -16,10 +16,10 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 #set the default path for built libraries to the "lib" directory
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/common/include)
 
-rosbuild_add_executable(neo_sick_s300_tf_node ros/src/neo_sick_s300_tf_node.cpp)
-rosbuild_add_executable(neo_unified_scan_publisher ros/src/neo_unified_scan_publisher.cpp)
+rosbuild_add_executable(scanner_stop_node ros/src/watch_scanner_stop.cpp)
+rosbuild_add_executable(watch_temp_node ros/src/watch_temp.cpp)
+rosbuild_add_executable(watch_volts_node ros/src/watch_volts.cpp)
 
 #uncomment if you have defined messages
 #rosbuild_genmsg()
