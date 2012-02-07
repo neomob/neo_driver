@@ -8,7 +8,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/neobotix/srb_ir</url>
-  <depend package="neo_serrelayboard"/>
+  <depend package="neo_msgs"/>
   <depend package="std_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="tf"/>

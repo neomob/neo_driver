@@ -7,19 +7,19 @@
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int16.h>
 #include <std_msgs/Empty.h>
-#include <neo_serrelayboard/EmergencyStopState.h>
-#include <neo_serrelayboard/BatState.h>
-#include <neo_serrelayboard/Temperatur.h>
-#include <neo_serrelayboard/DriveStates.h>
-#include <neo_serrelayboard/DriveCommands.h>
-#include <neo_serrelayboard/Keypad.h>
-#include <neo_serrelayboard/LCDOutput.h>
-#include <neo_serrelayboard/IRSensors.h>
-#include <neo_serrelayboard/GyroBoard.h>
-#include <neo_serrelayboard/RadarBoard.h>
-#include <neo_serrelayboard/USBoard.h>
-#include <neo_serrelayboard/IOOut.h>
-#include <neo_serrelayboard/IOAnalogIn.h>
+#include <neo_msgs/EmergencyStopState.h>
+#include <neo_msgs/BatState.h>
+#include <neo_msgs/Temperatur.h>
+#include <neo_msgs/DriveStates.h>
+#include <neo_msgs/DriveCommands.h>
+#include <neo_msgs/Keypad.h>
+#include <neo_msgs/LCDOutput.h>
+#include <neo_msgs/IRSensors.h>
+#include <neo_msgs/GyroBoard.h>
+#include <neo_msgs/RadarBoard.h>
+#include <neo_msgs/USBoard.h>
+#include <neo_msgs/IOOut.h>
+#include <neo_msgs/IOAnalogIn.h>
 
 // ROS service includes
 //--
@@ -76,9 +76,9 @@ class RelaisBoardNode
 		RelaisBoardNode()
 		{
 			//topics which allways get published
-			topicPub_isEmergencyStop = n.advertise<neo_serrelayboard::EmergencyStopState>("/srb_emergency_stop_state", 1);
-			topicPub_batVoltage = n.advertise<neo_serrelayboard::BatState>("/srb_battery_state", 1);
-			topicPub_temperatur = n.advertise<neo_serrelayboard::Temperatur>("/srb_temperatur", 1);
+			topicPub_isEmergencyStop = n.advertise<neo_msgs::EmergencyStopState>("/srb_emergency_stop_state", 1);
+			topicPub_batVoltage = n.advertise<neo_msgs::BatState>("/srb_battery_state", 1);
+			topicPub_temperatur = n.advertise<neo_msgs::Temperatur>("/srb_temperatur", 1);
 
 			// Make sure member variables have a defined state at the beginning
 			EM_stop_status_ = ST_EM_FREE;
@@ -98,14 +98,14 @@ class RelaisBoardNode
 		void sendEmergencyStopStates();
 		void sendAnalogIn();
 		//IOBoard
-		void getNewLCDOutput(const neo_serrelayboard::LCDOutput&); //output on a 20 char lcd display
+		void getNewLCDOutput(const neo_msgs::LCDOutput&); //output on a 20 char lcd display
 		void sendIOBoardDigIn();
 		void sendIOBoardDigOut();
-		void getIOBoardDigOut(const neo_serrelayboard::IOOut&);
+		void getIOBoardDigOut(const neo_msgs::IOOut&);
 		void sendIOBoardAnalogIn();
 		//motor:
 		void sendDriveStates();
-		void getNewDriveStates(const neo_serrelayboard::DriveCommands& driveCommands);
+		void getNewDriveStates(const neo_msgs::DriveCommands& driveCommands);
 		//gyroBoard:
 		void sendGyroBoard();
 		void zeroGyro(const std_msgs::Bool& b);

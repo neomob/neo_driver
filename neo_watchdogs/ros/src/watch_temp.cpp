@@ -34,7 +34,7 @@
 
 
 #include <ros/ros.h>
-#include <neo_serrelayboard/Temperatur.h>
+#include <neo_msgs/Temperatur.h>
 
 class WatchTempNode
 {
@@ -45,7 +45,7 @@ class WatchTempNode
 	ros::Subscriber subs_temp;
 	
 	int init();
-	void handletemp(const neo_serrelayboard::Temperatur& es);
+	void handletemp(const neo_msgs::Temperatur& es);
 	private:
 	
 };
@@ -56,7 +56,7 @@ int WatchTempNode::init()
 	return 0;
 }
 
-void WatchTempNode::handletemp(const neo_serrelayboard::Temperatur& es)
+void WatchTempNode::handletemp(const neo_msgs::Temperatur& es)
 {
 	if(es.temperatur > 70)
 	{

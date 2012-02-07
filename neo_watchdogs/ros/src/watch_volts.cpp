@@ -34,7 +34,7 @@
 
 
 #include <ros/ros.h>
-#include <neo_serrelayboard/BatState.h>
+#include <neo_msgs/BatState.h>
 
 class WatchVoltsNode
 {
@@ -45,7 +45,7 @@ class WatchVoltsNode
 	ros::Subscriber subs_volts;
 	
 	int init();
-	void handlevolts(const neo_serrelayboard::BatState& es);
+	void handlevolts(const neo_msgs::BatState& es);
 	private:
 	
 };
@@ -56,7 +56,7 @@ int WatchVoltsNode::init()
 	return 0;
 }
 
-void WatchVoltsNode::handlevolts(const neo_serrelayboard::BatState& es)
+void WatchVoltsNode::handlevolts(const neo_msgs::BatState& es)
 {
 	if(((float) es.volts)/1000 < 23.7)
 	{
