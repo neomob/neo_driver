@@ -7,7 +7,7 @@
   <author>Timo Hackel</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/neobotix/serrelayboard</url>
+  <url>http://ros.org/wiki/serrelayboard</url>
   <depend package="roscpp"/>
   <depend package="rostest"/>
   <depend package="std_msgs"/>

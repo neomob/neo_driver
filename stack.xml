@@ -1,6 +1,6 @@
 <stack>
   <description brief="neo_driver">neo_driver</description>
-  <author>Maintained by mob</author>
+  <author>Maintained by Timo Hackel</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/neo_driver</url>
