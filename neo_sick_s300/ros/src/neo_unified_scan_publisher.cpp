@@ -1,12 +1,24 @@
 /****************************************************************
  *
- * Copyright (c) 2012
+ * Copyright (c) 2010
  *
- * Neobotix	
- *						
+ * Fraunhofer Institute for Manufacturing Engineering	
+ * and Automation (IPA)
+ *
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- * strongly based on cob_unified_scan_publisher.cpp			
- * by: Alexander Bubeck
+ *
+ * Project name: care-o-bot
+ * ROS stack name: cob_driver
+ * ROS package name: cob_relayboard
+ * Description: Reads and sends data over Serial Interface to the Serial Relayboard. Main Tasks: Reading of EmergencyStop and LaserScannerStop
+ *								
+ * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ *			
+ * Author: Philipp Koehler
+ * Supervised by: Christian Connette, email:christian.connette@ipa.fhg.de
+ *
+ * Date of creation: March 2010
+ * ToDo:
  *
  * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  *
@@ -38,6 +50,12 @@
  * If not, see <http://www.gnu.org/licenses/>.
  *
  ****************************************************************/
+
+/* based on cob_unified_scan_publisher.cpp
+   lots of changes by timo hackel
+   hackel@neobotix.de
+*/
+
 
 //##################
 //#### includes ####
