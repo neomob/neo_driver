@@ -4,7 +4,7 @@
      neo_platformctrl_mecanum
 
   </description>
-  <author>neobotix</author>
+  <author>Timo Hackel</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/neo_platformctrl_mecanum</url>
