@@ -3,8 +3,7 @@
 	<!-- parameters -->
 	<arg name="name" default="sick_s300" />
 	<arg name="scanner_type" default="$(env ROBOT)" /> 
-	<arg name="hasNoTFBroadcast" default="false" /> 
-	<rosparam command="load" ns="$(arg name)" file="$(find neo_sick_s300)/ros/launch/$(arg scanner_type).yaml"/>
+	<rosparam command="load" ns="$(arg name)" file="$(find neo_base_mp_500)/ros/launch/sick/$(arg scanner_type).yaml"/>
 	<!-- start nodes -->
 	<node pkg="cob_sick_s300" type="cob_sick_s300" name="$(arg name)" respawn="false" output="screen" >
 		<remap from="scan" to="$(arg name)/scan_unfiltered"/>
@@ -17,9 +16,4 @@
 		<remap from="scan_filtered" to="/$(arg name)/scan"/>
 	</node>
 
-	<!-- include transformation broadcaster? -->
-	<include if="$(arg hasNoTFBroadcast)" file="$(find neo_sick_s300)/ros/launch/sick_s300_tf.launch">
-		<arg name="name" value="$(arg name)"/>
-		<arg name="scanner_type" value="$(arg scanner_type)"/>
-	</include>
 </launch>

@@ -1,0 +1,14 @@
+<package>
+  <description brief="neo_base_mp_500">
+
+     neo_base_mp_500
+
+  </description>
+  <author>mob</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_base_mp_500</url>
+
+</package>
+
+
