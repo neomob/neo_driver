@@ -4,11 +4,12 @@
 #include <neo_SerRelayBoard/SerRelayBoard.h>
 
 // ROS message includes
+#include <pr2_msgs/PowerState.h>
+#include <pr2_msgs/PowerBoardState.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Int16.h>
 #include <std_msgs/Empty.h>
 #include <neo_msgs/EmergencyStopState.h>
-#include <neo_msgs/BatState.h>
 #include <neo_msgs/Temperatur.h>
 #include <neo_msgs/DriveStates.h>
 #include <neo_msgs/DriveCommands.h>
@@ -43,7 +44,7 @@ class RelaisBoardNode
 		ros::Publisher topicPub_temperatur;
 		ros::Publisher topicPub_keypad;
 		ros::Publisher topicPub_IRSensor;
-
+		ros::Publisher topicPub_boardState;
 		//optional topics:
 		enum Modules {
 			DRIVE1=0,
@@ -77,9 +78,9 @@ class RelaisBoardNode
 		{
 			//topics which allways get published
 			topicPub_isEmergencyStop = n.advertise<neo_msgs::EmergencyStopState>("/srb_emergency_stop_state", 1);
-			topicPub_batVoltage = n.advertise<neo_msgs::BatState>("/srb_battery_state", 1);
+			topicPub_batVoltage = n.advertise<pr2_msgs::PowerState>("/power_state", 1);
 			topicPub_temperatur = n.advertise<neo_msgs::Temperatur>("/srb_temperatur", 1);
-
+			topicPub_boardState = n.advertise<pr2_msgs::PowerBoardState>("/power_board/state",1);
 			// Make sure member variables have a defined state at the beginning
 			EM_stop_status_ = ST_EM_FREE;
 			relayboard_available = false;
@@ -146,6 +147,6 @@ class RelaisBoardNode
 		int motorCanIdent[2];
 		std::string joint_names[2];
 		int hasKeyPad, hasIRSensors, hasLCDOut;
-
+		double voltage_min_, voltage_max_, charge_nominal_, voltage_nominal_, current_voltage;
 };
 

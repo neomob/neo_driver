@@ -8,9 +8,6 @@
 	<node pkg="cob_sick_s300" type="cob_sick_s300" name="$(arg name)" respawn="false" output="screen" >
 		<remap from="scan" to="$(arg name)/scan_unfiltered"/>
 	</node>
-	<!--node pkg="neo_sick_s300" type="neo_sick_s300" name="$(arg name)" respawn="false" output="screen" >
-		<remap from="scan" to="$(arg name)/scan_unfiltered"/>
-	</node-->
 	<node pkg="cob_sick_s300" ns="$(arg name)" type="cob_scan_filter" name="$(arg name)_filter" respawn="false" output="screen" >
 		<remap from="scan" to="/$(arg name)/scan_unfiltered"/>
 		<remap from="scan_filtered" to="/$(arg name)/scan"/>

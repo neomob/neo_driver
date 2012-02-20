@@ -34,39 +34,39 @@
 
 
 #include <ros/ros.h>
-#include <neo_msgs/BatState.h>
+#include <pr2_msgs/PowerState.h>
 
 class WatchVoltsNode
 {
 	public:
-	WatchVoltsNode(){};
+	WatchVoltsNode() : ten_min(60 * 10){};
 	virtual ~WatchVoltsNode(){};
 	ros::NodeHandle n;
 	ros::Subscriber subs_volts;
 	
 	int init();
-	void handlevolts(const neo_msgs::BatState& es);
+	void handlepower(const pr2_msgs::PowerState& ps);
 	private:
-	
+	ros::Duration ten_min;
 };
 
 int WatchVoltsNode::init()
 {
-	subs_volts = n.subscribe("/srb_battery_state", 1, &WatchVoltsNode::handlevolts, this);
+	subs_volts = n.subscribe("/power_state", 1, &WatchVoltsNode::handlepower, this);
 	return 0;
 }
 
-void WatchVoltsNode::handlevolts(const neo_msgs::BatState& es)
+void WatchVoltsNode::handlepower(const pr2_msgs::PowerState& ps)
 {
-	if(((float) es.volts)/1000 < 23.7)
+	if(( ps.time_remaining) < ten_min)
 	{
-		ROS_ERROR("the Volts are too low, the system is going to halt soon");
+		ROS_ERROR("the batteries energy is low, the system is going to halt soon");
 	}
 }
 
 int main (int argc, char **argv)
 {
-	ros::init(argc, argv, "volt_watcher");
+	ros::init(argc, argv, "power_watcher");
 	WatchVoltsNode node;
 	node.init();
 	ros::spin();

@@ -51,6 +51,14 @@ int RelaisBoardNode::init()
 
 	n.param("protocol_version", protocol_version_, 1);
     
+
+        n.param("voltage_min", voltage_min_, 23.7);
+	n.param("voltage_max", voltage_max_, 28.0);
+	n.param("charge_nominal", charge_nominal_, 40.0);
+	n.param("voltage_nominal", voltage_nominal_, 24.0);
+
+	current_voltage = 0;
+
 	m_SerRelayBoard = new SerRelayBoard(protocol_version_, &n);
 	m_SerRelayBoard->init();
 	ROS_INFO("Opened Relayboard at ComPort = %s", sComPort.c_str());
@@ -217,6 +225,16 @@ void RelaisBoardNode::sendEmergencyStopStates()
 		EM_msg.emergency_state = EM_msg.EMSTOP;
 	}
 	topicPub_isEmergencyStop.publish(EM_msg);
+
+        pr2_msgs::PowerBoardState pbs;
+        pbs.header.stamp = ros::Time::now();
+        if(EM_stop_status_ == ST_EM_FREE)
+          pbs.run_stop = true;
+        else
+          pbs.run_stop = false;
+        pbs.wireless_stop = true;
+	pbs.input_voltage = current_voltage;
+	topicPub_boardState.publish(pbs);
 }
 
 
@@ -230,9 +248,15 @@ void RelaisBoardNode::sendAnalogIn()
 	temp.temperatur = analogIn[2];
 	topicPub_temperatur.publish(temp);
 	//battery
-	neo_msgs::BatState bat;
-	bat.volts = analogIn[1];
-	bat.chargingCurrent = analogIn[0];
+	pr2_msgs::PowerState bat;
+	current_voltage = analogIn[1];
+	bat.header.stamp = ros::Time::now();
+	bat.power_consumption = analogIn[1] * analogIn[0];
+	double percentage = ((analogIn[1] /*measured volts*/ / 1000.0) - voltage_min_) * 100 / (voltage_max_ - voltage_min_);
+	/*dt_remaining = (i*dt)_nominal * v_nominal * percentage_remaining / (v_meassured * i_meassured)*/
+	bat.time_remaining = ros::Duration(charge_nominal_ * voltage_nominal_ * percentage / (100 * bat.power_consumption ));
+	bat.relative_capacity = percentage;
+	/* charging rate: analogIn[0];*/
 	topicPub_batVoltage.publish(bat);
 	//keypad
 	if(hasKeyPad == 1)
