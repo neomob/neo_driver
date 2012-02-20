@@ -8,7 +8,10 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/neo_sick_s300</url>
-  <depend package="cob_sick_s300"/>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="laser_geometry"/>
 </package>
 
 

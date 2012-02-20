@@ -5,7 +5,6 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/neo_driver</url>
   <depend stack="cob_common" /> <!-- cob_utilities -->
-  <depend stack="cob_driver" /> <!-- cob_sick_s300 -->
   <depend stack="cob_extern" /> <!-- libpcan, libntcan -->
   <depend stack="common_msgs" /> <!-- nav_msgs, trajectory_msgs, sensor_msgs, diagnostic_msgs -->
   <depend stack="geometry" /> <!-- tf -->

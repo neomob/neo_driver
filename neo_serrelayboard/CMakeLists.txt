@@ -36,6 +36,23 @@ target_link_libraries(${PROJECT_NAME} SerialIO)
 rosbuild_add_executable(neo_relayboard_node ros/src/neo_relayboard_node.cpp ros/src/RelaisBoardNode.cpp)
 target_link_libraries(neo_relayboard_node ${PROJECT_NAME})
 
+rosbuild_add_executable(neo_srbdrive ros/src/neo_SRBDrive_node.cpp)
+rosbuild_link_boost(neo_srbdrive thread)
+
+rosbuild_add_executable(neo_srbgyro ros/src/neo_SRBGyro_node.cpp)
+rosbuild_link_boost(neo_srbgyro thread)
+
+rosbuild_add_executable(neo_srb_ir ros/src/neo_SRB_IR_node.cpp)
+rosbuild_link_boost(neo_srb_ir thread)
+
+rosbuild_add_executable(neo_srb_ir_tf_node ros/src/neo_tf_SRB_IR_node.cpp)
+rosbuild_link_boost(neo_srb_ir_tf_node thread)
+
+rosbuild_add_executable(neo_srb_us ros/src/neo_SRB_US_node.cpp)
+rosbuild_link_boost(neo_srb_us thread)
+
+rosbuild_add_executable(neo_srb_us_tf_node ros/src/neo_tf_SRB_US_node.cpp)
+rosbuild_link_boost(neo_srb_us_tf_node thread)
 
 #common commands for building c++ executables and libraries
 #rosbuild_add_library(${PROJECT_NAME} src/example.cpp)

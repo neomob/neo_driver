@@ -2,9 +2,9 @@
 <launch>
 	<!-- parameters -->
 	<arg name="hasNoTFBroadcast" default="false" /> 
-	<rosparam command="load" ns="srbgyro" file="$(find neo_srbgyro)/ros/launch/$(env ROBOT).yaml"/>
+	<rosparam command="load" ns="srbgyro" file="$(find neo_base_mp_500)/ros/launch/serrelay/gyroboard/$(env ROBOT).yaml"/>
 	<!-- start nodes -->
-	<node pkg="neo_srbgyro" type="neo_srbgyro" ns="srbgyro" name="srbgyro_node" respawn="false" output="screen"/>
+	<node pkg="neo_serrelayboard" type="neo_srbgyro" ns="srbgyro" name="srbgyro_node" respawn="false" output="screen"/>
 </launch>
 
 

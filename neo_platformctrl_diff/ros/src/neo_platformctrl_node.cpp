@@ -79,7 +79,7 @@ PlatformCtrlNode::~PlatformCtrlNode()
 int PlatformCtrlNode::init()
 {
 	std::string kinType;
-	n.getParam("/platformctrl/kinematics", kinType);
+	n.param<std::string>("kinematics", kinType,"DiffDrive2W");
 	n.param<bool>("sendTransform",sendTransform,true);
 
 	if (kinType == "DiffDrive2W")
@@ -88,16 +88,18 @@ int PlatformCtrlNode::init()
 		double axisLength;
 		DiffDrive2WKinematics* diffKin = new DiffDrive2WKinematics;
 		kin = diffKin;
-		if(n.hasParam("/platformctrl/wheelDiameter"))
+		if(n.hasParam("wheelDiameter"))
 		{
-			n.getParam("/platformctrl/wheelDiameter",wheelDiameter);
+			n.getParam("wheelDiameter",wheelDiameter);
 			diffKin->setWheelDiameter(wheelDiameter);
+			ROS_INFO("got wheeldieameter from config file");
 		}
 		else diffKin->setWheelDiameter(0.3);
-		if(n.hasParam("/platformctrl/robotWidth"))
+		if(n.hasParam("robotWidth"))
 		{
-			n.getParam("/platformctrl/robotWidth",axisLength);
+			n.getParam("robotWidth",axisLength);
 			diffKin->setAxisLength(axisLength);
+			ROS_INFO("got axis from config file");
 		}
 		else diffKin->setAxisLength(1);
 	}

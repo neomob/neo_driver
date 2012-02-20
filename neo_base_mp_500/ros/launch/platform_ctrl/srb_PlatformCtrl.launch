@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <launch>
 	<arg name="sendTF" default="true"/>
-	<param name="/diff_node/sendTransform" value="false"/>
-	<param if="$(arg sendTF)" name="/diff_node/sendTransform" value="true"/>
-	<rosparam command="load" ns="diff_node" file="$(find neo_base_mp_500)/ros/launch/platform_ctrl/$(env ROBOT).yaml"/>
-	<node pkg="neo_platformctrl_diff" type="neo_platformctrl_diff_node" ns="diff_node" name="srbplatformctrl_node" respawn="false" output="screen"/>
+	<param name="platformctrl_node/sendTransform" value="false"/>
+	<param if="$(arg sendTF)" name="platformctrl_node/sendTransform" value="true"/>
+	<rosparam command="load" ns="platformctrl_node" file="$(find neo_base_mp_500)/ros/launch/platform_ctrl/$(env ROBOT).yaml"/>
+	<node pkg="neo_platformctrl_diff" type="neo_platformctrl_diff_node" name="platformctrl_node" respawn="false" output="screen">
+
+	</node>
 </launch>
 
 

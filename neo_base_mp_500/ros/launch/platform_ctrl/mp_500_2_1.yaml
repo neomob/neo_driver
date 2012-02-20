@@ -1,5 +1,5 @@
 #robot's geometric parameters:
 
-kinematics: DiffDrive2W
+kinematics: DiffDrive4W
 wheelDiameter: 0.25
 robotWidth: 0.51
