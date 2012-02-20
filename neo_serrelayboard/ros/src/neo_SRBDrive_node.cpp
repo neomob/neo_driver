@@ -38,7 +38,7 @@
 #include <neo_msgs/DriveStates.h>
 #include <neo_msgs/DriveCommands.h>
 #include <sensor_msgs/JointState.h>
-#include <trajectory_msgs/JointTrajectoryPoint.h>
+#include <trajectory_msgs/JointTrajectory.h>
 #include <boost/thread.hpp>
 
 /*\brief SRBDriveNode is a wrapper class for converting the drive output of the SerialRelayBoard into ROS sensor_msgs;
@@ -55,7 +55,7 @@ class SRBDriveNode
 	
 	int init();
 	void sendJointState(const neo_msgs::DriveStates& state);
-	void sendDriveCommands(const trajectory_msgs::JointTrajectoryPoint& newState);
+	void sendDriveCommands(const trajectory_msgs::JointTrajectory& newState);
 	private:
 	boost::mutex mOut;
 
@@ -90,13 +90,13 @@ void SRBDriveNode::sendJointState(const neo_msgs::DriveStates& srsState)
 
 }
 
-void SRBDriveNode::sendDriveCommands(const trajectory_msgs::JointTrajectoryPoint& newState)
+void SRBDriveNode::sendDriveCommands(const trajectory_msgs::JointTrajectory& newState)
 {
 	//ROS_INFO("wrap velocity cmd: %f %f",newState.velocities[0],newState.velocities[1]);
 	neo_msgs::DriveCommands cmd;
 	for(int i=0; i<2; i++)
 	{
-		cmd.angularVelocity[i] = newState.velocities[i];
+		cmd.angularVelocity[i] = newState.points[0].velocities[i];
 		cmd.driveActive[i] = true;
 		cmd.quickStop[i] = false;
 		cmd.disableBrake[i] = true;

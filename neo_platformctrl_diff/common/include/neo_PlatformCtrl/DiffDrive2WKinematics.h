@@ -39,7 +39,7 @@
 #include <neo_PlatformCtrl/Kinematics.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/JointState.h>
-#include <trajectory_msgs/JointTrajectoryPoint.h>
+#include <trajectory_msgs/JointTrajectory.h>
 #include <nav_msgs/Odometry.h>
 
 class DiffDrive2WKinematics : public Kinematics 
@@ -47,7 +47,7 @@ class DiffDrive2WKinematics : public Kinematics
    public:
 	DiffDrive2WKinematics();
 	void execForwKin(const sensor_msgs::JointState& js, nav_msgs::Odometry& odom, OdomPose& cpose);
-	void execInvKin(const geometry_msgs::Twist& twist, trajectory_msgs::JointTrajectoryPoint& traj);
+	void execInvKin(const geometry_msgs::Twist& twist, trajectory_msgs::JointTrajectory& traj);
 	void setAxisLength(double dLength);
 	void setWheelDiameter(double dDiam);
 
