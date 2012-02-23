@@ -4,7 +4,7 @@
 	<arg name="hasNoTFBroadcast" default="false" /> 
 	<rosparam command="load" ns="srbir" file="$(find neo_base_mp_500)/ros/launch/serrelay/ir/$(env ROBOT).yaml"/>
 	<!-- start nodes -->
-	<node pkg="neo_serrelayboard" type="neo_srb_ir" ns="srbir" name="srb_ir_node" respawn="false" output="screen"/>
+	<node pkg="cob_relayboard" type="neo_srb_ir" ns="srbir" name="srb_ir_node" respawn="false" output="screen"/>
 	<!-- include transformation broadcaster? -->
 	<include if="$(arg hasNoTFBroadcast)"  file="$(find neo_base_mp_500)/ros/launch/serrelay/ir/srb_tf_ir.launch"/>
 </launch>
