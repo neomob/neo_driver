@@ -1,4 +1,5 @@
 #drive
+AutoInit: true
 cycleRate: 50
 numberOfMotors: 4
 maxDriveRate: 200000
