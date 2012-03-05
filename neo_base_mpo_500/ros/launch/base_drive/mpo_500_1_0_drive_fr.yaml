@@ -17,4 +17,5 @@ HomeEvent: 9
 HomeDigIn: 0x0001
 HomeTimeOut: 1000
 VelPModeEncIncrS: 10
+CurrentToTorque: 1 #todo
 CANId: 3
