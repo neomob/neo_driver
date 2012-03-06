@@ -18,6 +18,6 @@ HomeDigIn: 0x0001
 HomeTimeOut: 1000
 VelPModeEncIncrS: 10
 CurrentContLimit: 4.4
-CurrentToTorque: 1 #todo
+CurrentToTorque: 0.73
 CANId: 4
 
