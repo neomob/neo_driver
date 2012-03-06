@@ -21,6 +21,4 @@
 			<remap from="cmd_joint_traj" to="/cmd_joint_traj"/>
 		</node>
 	</group>
-
-	
 </launch>	
