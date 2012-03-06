@@ -66,7 +66,7 @@ int ScanStopNode::init()
 	hasGoal = false;
 	pub_navGoal = n.advertise<move_base_msgs::MoveBaseActionGoal>("/move_base/goal", 1);
 	subs_navGoal = n.subscribe("/move_base/goal", 1, &ScanStopNode::handleNavGoal, this);
-	subs_errorStop = n.subscribe("/srb_emergency_stop_state", 1, &ScanStopNode::handleErrorStop, this);
+	subs_errorStop = n.subscribe("/emergency_stop_state", 1, &ScanStopNode::handleErrorStop, this);
 	return 0;
 }
 

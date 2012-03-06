@@ -52,7 +52,7 @@ class WatchTempNode
 
 int WatchTempNode::init()
 {
-	subs_temp = n.subscribe("/srb_temperatur", 1, &WatchTempNode::handletemp, this);
+	subs_temp = n.subscribe("/temperature", 1, &WatchTempNode::handletemp, this);
 	return 0;
 }
 
