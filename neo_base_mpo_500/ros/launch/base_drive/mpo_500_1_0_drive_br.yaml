@@ -1,10 +1,11 @@
 #Parameters for left drive
-control_type: velocity_control
+control_type: 2
 joint_name: wheel_back_right_joint
 
 EncIncrPerRevMot: 10000
 VelMeasFrqHz: 1
 GearRatio: 25
+GearEfficiency: 0.7
 BeltRatio: 1
 Sign: -1.0
 VelMaxEncIncrS: 300000
