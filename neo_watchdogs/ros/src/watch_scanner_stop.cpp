@@ -39,7 +39,7 @@
 
 #include <ros/ros.h>
 #include <move_base_msgs/MoveBaseActionGoal.h>
-#include <neo_msgs/EmergencyStopState.h>
+#include <cob_relayboard/EmergencyStopState.h>
 
 class ScanStopNode
 {
@@ -53,7 +53,7 @@ class ScanStopNode
 	
 	int init();
 	void handleNavGoal(const move_base_msgs::MoveBaseActionGoal& cg);
-	void handleErrorStop(const neo_msgs::EmergencyStopState& es);
+	void handleErrorStop(const cob_relayboard::EmergencyStopState& es);
 	private:
 	move_base_msgs::MoveBaseActionGoal currentGoal;
 	bool hasError, hasGoal;
@@ -76,7 +76,7 @@ void ScanStopNode::handleNavGoal(const move_base_msgs::MoveBaseActionGoal& cg)
 	hasGoal = true;
 }
 
-void ScanStopNode::handleErrorStop(const neo_msgs::EmergencyStopState& es)
+void ScanStopNode::handleErrorStop(const cob_relayboard::EmergencyStopState& es)
 {
 	if(es.scanner_stop)
 	{
