@@ -34,10 +34,10 @@
 
 
 #include <ros/ros.h>
-#include <neo_PlatformCtrl/DiffDrive2WKinematics.h>
 #include <boost/thread.hpp>
-#include <trajectory_msgs/JointTrajectoryPoint.h>
+#include <trajectory_msgs/JointTrajectory.h>
 #include <neo_PlatformCtrl/Kinematics.h>
+#include <neo_PlatformCtrl/DiffDrive2WKinematics.h>
 #include <tf/transform_broadcaster.h>
 
 class PlatformCtrlNode 
@@ -73,31 +73,38 @@ PlatformCtrlNode::~PlatformCtrlNode()
 }
 
 
-
-
-
 int PlatformCtrlNode::init()
 {
 	std::string kinType;
-	n.getParam("/platformctrl/kinematics", kinType);
-	n.param<bool>("sendTransform",sendTransform,true);
+	n.param<bool>("sendTransform",sendTransform,false);
+	if(sendTransform)
+	{
+		ROS_INFO("platform ctrl node: sending transformation");
+	} else {
+
+		ROS_INFO("platform ctrl node: sending no transformation");
+	}
+	n.getParam("kinematics", kinType);
 
 	if (kinType == "DiffDrive2W")
 	{
+
 		double wheelDiameter;
 		double axisLength;
 		DiffDrive2WKinematics* diffKin = new DiffDrive2WKinematics;
 		kin = diffKin;
-		if(n.hasParam("/platformctrl/wheelDiameter"))
+		if(n.hasParam("wheelDiameter"))
 		{
-			n.getParam("/platformctrl/wheelDiameter",wheelDiameter);
+			n.getParam("wheelDiameter",wheelDiameter);
 			diffKin->setWheelDiameter(wheelDiameter);
+			ROS_INFO("got wheeldieameter from config file");
 		}
 		else diffKin->setWheelDiameter(0.3);
-		if(n.hasParam("/platformctrl/robotWidth"))
+		if(n.hasParam("robotWidth"))
 		{
-			n.getParam("/platformctrl/robotWidth",axisLength);
+			n.getParam("robotWidth",axisLength);
 			diffKin->setAxisLength(axisLength);
+			ROS_INFO("got axis from config file");
 		}
 		else diffKin->setAxisLength(1);
 	}
@@ -110,7 +117,7 @@ int PlatformCtrlNode::init()
 	p.xAbs = 0; p.yAbs = 0; p.phiAbs = 0;
 	topicPub_Odometry = n.advertise<nav_msgs::Odometry>("/odom",1);	
 	topicSub_DriveState = n.subscribe("/joint_states",1,&PlatformCtrlNode::receiveOdo, this);
-	topicPub_DriveCommands = n.advertise<trajectory_msgs::JointTrajectoryPoint>("/cmd_joint_traj",1);	
+	topicPub_DriveCommands = n.advertise<trajectory_msgs::JointTrajectory>("/cmd_joint_traj",1);	
 	topicSub_ComVel = n.subscribe("/cmd_vel",1,&PlatformCtrlNode::receiveCmd, this);
 	return 0;
 }
@@ -120,7 +127,7 @@ int PlatformCtrlNode::init()
 void PlatformCtrlNode::receiveCmd(const geometry_msgs::Twist& twist)
 {
    mutex.lock();
-	trajectory_msgs::JointTrajectoryPoint traj;
+	trajectory_msgs::JointTrajectory traj;
 	kin->execInvKin(twist,traj);
 	topicPub_DriveCommands.publish(traj);
    mutex.unlock();
@@ -155,10 +162,11 @@ void PlatformCtrlNode::receiveOdo(const sensor_msgs::JointState& js)
 
 int main (int argc, char** argv)
 {
-	ros::init(argc, argv, "neo_platformctrl_node");
+	ros::init(argc, argv, "mecanum_node");
 	PlatformCtrlNode node;
 	if(node.init() != 0) ROS_ERROR("can't initialize neo_platformctrl_node");
 	ros::spin();
 	return 0;
 }
+
 

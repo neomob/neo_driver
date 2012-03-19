@@ -1,4 +1,0 @@
-ros/launch/relayboard.launch für mehr als nur eine konfiguration anpassen.
-windows support für serialIO.*
-test motor publisher
-ros/src/neo_*node*_simulator.py

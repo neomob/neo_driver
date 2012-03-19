@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-	<arg name="name"/>
-	<arg name="scanner_type"/> 
-	<!--rosparam command="load" ns="$(arg name)" file="$(find neo_sick_s300)/ros/launch/$(arg scanner_type).yaml"/-->
-	<node pkg="neo_sick_s300" type="neo_sick_s300_tf_node" ns="$(arg name)" name="$(arg name)_tf" respawn="false" output="screen">
-		<remap from="/scan" to="/$(arg name)/scan_unfiltered"/>
-	</node>
-</launch>

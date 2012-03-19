@@ -1,0 +1,24 @@
+#Parameters for left drive
+control_type: 2
+joint_name: wheel_back_right_joint
+
+EncIncrPerRevMot: 10000
+VelMeasFrqHz: 1
+GearRatio: 25
+GearEfficiency: 0.7
+BeltRatio: 1
+Sign: -1.0
+VelMaxEncIncrS: 300000
+AccIncrS: 500000
+DecIncrS: 500000
+Homing: false
+HomePos: 0
+HomeVelRadS: 0.2
+HomeEvent: 9
+HomeDigIn: 0x0001
+HomeTimeOut: 1000
+VelPModeEncIncrS: 10
+CurrentContLimit: 4.4
+CurrentToTorque: 0.19
+CANId: 5
+

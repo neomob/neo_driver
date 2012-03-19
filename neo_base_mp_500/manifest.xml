@@ -1,0 +1,17 @@
+<package>
+  <description brief="neo_base_mp_500">
+
+     neo_base_mp_500
+
+  </description>
+  <author>mob</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_base_mp_500</url>
+  <depend package="neo_platformctrl_diff"/>
+  <depend package="cob_relayboard"/>
+  <depend package="cob_sick_s300"/>
+
+</package>
+
+
