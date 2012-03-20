@@ -1,0 +1,15 @@
+<package>
+  <description brief="neo_base_mpo_700">
+
+     neo_base_mpo_700
+
+  </description>
+  <author>neobotix</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/neo_base_mpo_700</url>
+  <depend stack="cob_driver"/>
+  <depend stack="cob_robots"/>
+</package>
+
+
