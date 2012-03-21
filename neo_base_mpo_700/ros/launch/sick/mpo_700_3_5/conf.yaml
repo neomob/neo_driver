@@ -1,5 +1,5 @@
 port: /dev/ttyUSB0
 baud: 500000
 inverted: true
-frame_id: /base_laser_link
+frame_id: /base_laser_front_link
 scan_intervals: [[-1.9, 1.9]] #[rad from -PI to PI] these intervals are included to the scan
