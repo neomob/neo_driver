@@ -8,10 +8,8 @@
 	<include file="$(find cob_bringup)/components/base.launch" >
 		<arg name="sim" value="false" />
 		<arg name="namespace" value="base_controller"/>
-		<arg name="topicJointName" value="/joint_states"/>
-		<arg name="topicJointCmd" value="/cmd_joint_traj"/>
-		<arg name="topicOdom" value="/odom"/>
-		<arg name="topicCmdVel" value="/cmd_vel" />
+		<arg name="topicJointName" value="joint_states"/>
+		<arg name="topicJointCmd" value="cmd_joint_traj"/>
 		<arg name="topicEmergencyState" value="/emergency_stop_state" />
 		<arg name="iniDir" value="$(arg IniDirectory)" />
 		<arg name="configBaseDriveChain" value="$(find neo_base_mpo_700)/ros/launch/base_drive/$(env ROBOT)"/>
