@@ -27,6 +27,7 @@ BaudrateVal: 0
 GenericBufferLen: 2000
 
 drive0: #front left steer
+  CANId: 1
   control_type: 2
   joint_name: fl_caster_rotation_joint
   EncIncrPerRevMot: 4096
@@ -41,7 +42,7 @@ drive0: #front left steer
   Homing: true
   HomeCoupleID: 2
   HomeCoupleVelRadS: 0.2
-  HomePos: 0
+  HomePos: -1100
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
@@ -50,6 +51,7 @@ drive0: #front left steer
   CurrentContLimit: 4.4
   CurrentToTorque: 1 #todo
   CANId: 1
+
 drive1: #front left wheel
   control_type: 2
   joint_name: fl_caster_r_wheel_joint
@@ -86,10 +88,10 @@ drive2: #back left steer
   AccIncrS: 1000000
   DecIncrS: 1000000
   Homing: true
-  HomeCoupleID: 4
+#  HomeCoupleID: 4
   HomeCoupleVelRadS: 0.2
-  HomePos: 0
-  HomeVelRadS: -0.375
+  HomePos: -300
+  HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
   HomeTimeOut: 1000
@@ -134,10 +136,10 @@ drive4: #back right steer
   AccIncrS: 1000000
   DecIncrS: 1000000
   Homing: true
-  HomeCoupleID: 6
+#  HomeCoupleID: 6
   HomeCoupleVelRadS: 0.2
-  HomePos: 0
-  HomeVelRadS: -0.375
+  HomePos: -1100
+  HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
   HomeTimeOut: 1000
@@ -182,9 +184,9 @@ drive6: #front right steer
   AccIncrS: 1000000
   DecIncrS: 1000000
   Homing: true
-  HomeCoupleID: 8
+#  HomeCoupleID: 8
   HomeCoupleVelRadS: 0.2
-  HomePos: 0
+  HomePos: -1100
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
