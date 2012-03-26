@@ -2,7 +2,8 @@
 <launch>
 	<arg name="sim" default="false" />
 	<!-- upload parameters -->
-	<arg name="IniDirectory" default="$(find cob_hardware_config)/cob3-4/config/base/"/>
+	<!--arg name="IniDirectory" default="$(find cob_hardware_config)/cob3-4/config/base/"/-->
+	<arg name="IniDirectory" default="$(find neo_base_mpo_700)/ros/launch/base_drive/$(env ROBOT)/"/>
 	
 	<!-- start underlying components - base_drive_chain -->
 	<include file="$(find cob_bringup)/components/base.launch" >
