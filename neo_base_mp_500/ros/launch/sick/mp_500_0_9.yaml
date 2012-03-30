@@ -1,0 +1,4 @@
+port: /dev/ttyUSB0
+baud: 500000
+inverted: false
+frame_id: /base_laser_link

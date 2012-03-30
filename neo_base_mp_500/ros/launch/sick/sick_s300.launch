@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- parameters -->
+	<arg name="name" default="sick_s300" />
+	<arg name="scanner_type" default="$(env ROBOT)" /> 
+	<rosparam command="load" ns="$(arg name)" file="$(find neo_base_mp_500)/ros/launch/sick/$(arg scanner_type).yaml"/>
+	<!-- start nodes -->
+	<rosparam command="load" file="$(find neo_base_mp_500)/ros/launch/sick/$(arg scanner_type).yaml"/>
+	<node pkg="cob_sick_s300" type="cob_sick_s300" name="$(arg name)" respawn="false" output="screen" >
+		<remap from="$(arg name)/scan" to="$(arg name)/scan_unfiltered"/>
+	</node>
+	<node pkg="cob_sick_s300" type="cob_scan_filter" name="$(arg name)_filter" respawn="false" output="screen" >
+		<remap from="scan" to="$(arg name)/scan_unfiltered"/>
+		<remap from="scan_filtered" to="$(arg name)/scan"/>
+		<rosparam command="load" file="$(find neo_base_mp_500)/ros/launch/sick/$(arg scanner_type).yaml"/>
+	</node>
+
+</launch>

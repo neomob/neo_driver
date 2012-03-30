@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="sendTF" default="true"/>
+	<param if="$(arg sendTF)" name="mecanum_node/sendTransform" value="true"/>
+	<param unless="$(arg sendTF)" name="mecanum_node/sendTransform" value="false"/>
+	<rosparam command="load" ns="mecanum_node" file="$(find neo_base_mpo_500)/ros/launch/platform_ctrl/$(env ROBOT).yaml"/>
+	<node pkg="neo_platformctrl_mecanum" type="neo_platformctrl_mecanum_node" name="mecanum_node" ns="mecanum_node" respawn="false" output="screen"/>
+</launch>
+
+

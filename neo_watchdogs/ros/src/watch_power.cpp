@@ -33,28 +33,41 @@
  *********************************************************************/
 
 
-#ifndef neo_diffdrivekinematics_h_
-#define neo_diffdrivekinematics_h_
+#include <ros/ros.h>
+#include <pr2_msgs/PowerState.h>
 
-#include <neo_PlatformCtrl/Kinematics.h>
-#include <geometry_msgs/Twist.h>
-#include <sensor_msgs/JointState.h>
-#include <trajectory_msgs/JointTrajectory.h>
-#include <nav_msgs/Odometry.h>
-
-class DiffDrive2WKinematics : public Kinematics 
+class WatchVoltsNode
 {
-   public:
-	DiffDrive2WKinematics();
-	void execForwKin(const sensor_msgs::JointState& js, nav_msgs::Odometry& odom, OdomPose& cpose);
-	void execInvKin(const geometry_msgs::Twist& twist, trajectory_msgs::JointTrajectory& traj);
-	void setAxisLength(double dLength);
-	void setWheelDiameter(double dDiam);
-
-   private:
-	double m_dAxisLength;
-	double 	m_dDiam;
+	public:
+	WatchVoltsNode() : ten_min(60 * 10){};
+	virtual ~WatchVoltsNode(){};
+	ros::NodeHandle n;
+	ros::Subscriber subs_volts;
+	
+	int init();
+	void handlepower(const pr2_msgs::PowerState& ps);
+	private:
+	ros::Duration ten_min;
 };
 
+int WatchVoltsNode::init()
+{
+	subs_volts = n.subscribe("/power_state", 1, &WatchVoltsNode::handlepower, this);
+	return 0;
+}
 
-#endif //neo_diffdrivekinematics_h_
+void WatchVoltsNode::handlepower(const pr2_msgs::PowerState& ps)
+{
+	if(( ps.time_remaining) < ten_min)
+	{
+		ROS_ERROR("the batteries energy is low, the system is going to halt soon");
+	}
+}
+
+int main (int argc, char **argv)
+{
+	ros::init(argc, argv, "power_watcher");
+	WatchVoltsNode node;
+	node.init();
+	ros::spin();
+}

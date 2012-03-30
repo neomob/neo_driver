@@ -65,11 +65,21 @@ void DiffDrive2WKinematics::execForwKin(const sensor_msgs::JointState& js, nav_m
 	last_time = current_time;
 }
 
-void DiffDrive2WKinematics::execInvKin(const geometry_msgs::Twist& twist, trajectory_msgs::JointTrajectoryPoint& traj)
+void DiffDrive2WKinematics::execInvKin(const geometry_msgs::Twist& twist, trajectory_msgs::JointTrajectory& traj)
 {
+	traj.joint_names.clear();
+	traj.points.clear();
+
 	//angular velocity in rad
-	traj.velocities.push_back( (twist.linear.x + (twist.angular.z * m_dAxisLength) / 2) * 2 / m_dDiam );
-	traj.velocities.push_back( (twist.linear.x - (twist.angular.z * m_dAxisLength) / 2) * 2 / m_dDiam );	
+	trajectory_msgs::JointTrajectoryPoint point;
+	point.velocities.resize(4);
+	// w1:
+	traj.joint_names.push_back("wheel_front_left_base_link");
+	point.velocities[0] = (twist.linear.x + (twist.angular.z * m_dAxisLength) / 2) * 2 / m_dDiam; 
+	// w2:
+	traj.joint_names.push_back("wheel_front_right_base_link");
+	point.velocities[1] = (twist.linear.x - (twist.angular.z * m_dAxisLength) / 2) * 2 / m_dDiam; 
+	traj.points.push_back(point);
 }
 
 void DiffDrive2WKinematics::setAxisLength(double dLength)
