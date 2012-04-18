@@ -42,7 +42,8 @@ drive0: #front left steer
   Homing: true
   HomeCoupleID: 2
   HomeCoupleVelRadS: 0.2
-  HomePos: 0
+  HomePos: 500
+  //HomePos: 0
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
@@ -90,7 +91,8 @@ drive2: #back left steer
   Homing: true
   HomeCoupleID: 4
   HomeCoupleVelRadS: 0.2
-  HomePos: -300
+  HomePos: -400
+  //HomePos: -300
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
@@ -138,7 +140,8 @@ drive4: #back right steer
   Homing: true
   HomeCoupleID: 6
   HomeCoupleVelRadS: 0.2
-  HomePos: -1100
+  HomePos: 900
+  //HomePos: -1100
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
@@ -186,7 +189,7 @@ drive6: #front right steer
   Homing: true
   HomeCoupleID: 8
   HomeCoupleVelRadS: 0.2
-  HomePos: -1100
+  HomePos: -1000
   HomeVelRadS: 0.375
   HomeEvent: 9
   HomeDigIn: 0x0001
