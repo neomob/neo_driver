@@ -23,7 +23,7 @@ NetESD: 0
 #4 = 50 kbit/s
 #5 = 20 kbit/s
 #6 = 10 kbit/s
-BaudrateVal: 1
+BaudrateVal: 0
 GenericBufferLen: 2000
 
 drive0: #front left steer
